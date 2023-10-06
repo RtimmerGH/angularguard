@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserRole } from './services/user-roles';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'guard';
+  anon = UserRole.anonymous;
+  user = UserRole.user;
+  admin = UserRole.admin;
+  role = UserRole.anonymous;
+
+  constructor(private userService: UserService) {}
+
+  changeRole(role: UserRole) {
+    this.userService.setRole(role);
+    this.role = role;    
+  }
+
 }
